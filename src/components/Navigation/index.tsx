@@ -1,18 +1,25 @@
-import Link from 'next/link';
-import React from 'react';
+'use client';
 
-const Navigation = () => {
+import Link from 'next/link';
+import { useParams, usePathname } from 'next/navigation';
+import React from 'react';
+interface Props {
+  navItems: { cabin: string; about: string; cuest_area: string };
+}
+const Navigation = ({ navItems }: Props) => {
+  const { lang } = useParams();
+
   return (
     <nav className='z-50'>
       <ul className='flex gap-8 text-primary-50'>
         <li>
-          <Link href={'/cabins'}>Cabin</Link>
+          <Link href={`/${lang}/cabins`}>{navItems.cabin}</Link>
         </li>
         <li>
-          <Link href={'/about'}>About</Link>
+          <Link href={`/${lang}/about`}>{navItems.about}</Link>
         </li>
         <li>
-          <Link href={'/account'}>Cuest area</Link>
+          <Link href={`/${lang}/account`}>{navItems.cuest_area}</Link>
         </li>
       </ul>
     </nav>

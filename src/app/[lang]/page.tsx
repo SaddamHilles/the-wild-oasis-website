@@ -3,7 +3,14 @@ import Link from 'next/link';
 import React from 'react';
 import bg from '@/../../public/bg.png';
 
-const Homepage = () => {
+interface Props {
+  params: {
+    lang: string;
+  };
+}
+const Homepage = ({ params }: Props) => {
+  console.log('params: ', params);
+
   return (
     <div className='mt-24'>
       <Image

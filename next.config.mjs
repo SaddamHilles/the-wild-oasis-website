@@ -1,5 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // i18n: {
+  //   locales: ['en', 'fr', 'es'], // List of supported locales
+  //   defaultLocale: 'en',          // Default locale
+  //   localeDetection: true,        // Auto-detect user locale
+  // },
   images: {
     remotePatterns: [
       {
