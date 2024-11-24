@@ -140,13 +140,14 @@ export async function getBookedDatesByCabinId(
 ): Promise<Date[]> {
   let today = new Date();
   today.setUTCHours(0, 0, 0, 0);
-  // today = today.toISOString();
+  // const todayISOString  = today.toISOString();
 
   const { data, error } = await supabase
     .from('bookings')
     .select('*')
     .eq('cabinId', cabinId)
     .or(`startDate.gte.${today.toISOString()},status.eq.checked-in`);
+  // await new Promise(res => setTimeout(res, 2000));
 
   if (error) {
     console.error(error);
@@ -167,6 +168,7 @@ export async function getBookedDatesByCabinId(
 
 export async function getSettings(): Promise<Settings | null> {
   const { data, error } = await supabase.from('settings').select('*').single();
+  // await new Promise(res => setTimeout(res, 2000));
 
   if (error) {
     console.error(error);
