@@ -2,6 +2,7 @@ import { eachDayOfInterval } from 'date-fns';
 import { createClient } from '@supabase/supabase-js';
 import { supabase } from './supabase';
 import { CabinType } from '@/utils/types.t';
+import { notFound } from 'next/navigation';
 
 type Guest = {
   id: number;
@@ -51,6 +52,7 @@ export async function getCabin(id: number): Promise<CabinType | null> {
 
   if (error) {
     console.error(error);
+    notFound();
     return null;
   }
 
@@ -82,7 +84,7 @@ export const getCabins = async function (): Promise<CabinType[]> {
 
   // await new Promise(res => setTimeout(res, 2000));
   if (error) {
-    console.error(error);
+    console.error('error: ', error);
     throw new Error('Cabins could not be loaded');
   }
 
