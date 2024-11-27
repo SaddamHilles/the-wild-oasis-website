@@ -1,6 +1,7 @@
 import CabinCard from '@/components/CabinCard';
 import CabinList, { FilterTypes } from '@/components/CabinList';
 import FilterCabinsByURL from '@/components/FilterCabinsByURL';
+import ReservationReminder from '@/components/ReservationReminder';
 import Spinner from '@/components/Spinners/Spinner';
 import { Metadata } from 'next';
 import React, { Suspense } from 'react';
@@ -35,6 +36,7 @@ function CabinsPage({ searchParams }: Props) {
       </div>
       <Suspense fallback={<Spinner />} key={filter}>
         <CabinList filter={filter} />
+        <ReservationReminder />
       </Suspense>
     </div>
   );

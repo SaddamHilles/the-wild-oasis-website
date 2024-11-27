@@ -1,8 +1,10 @@
 'use client';
 
+import { useReservation } from '@/context';
 import { CabinType, Nullable, SettingType } from '@/utils/types.t';
 import { isWithinInterval } from 'date-fns';
-import { DayPicker } from 'react-day-picker';
+import { useState } from 'react';
+import { DateRange, DayPicker } from 'react-day-picker';
 import 'react-day-picker/dist/style.css';
 
 interface Range {
@@ -24,14 +26,15 @@ interface Props {
   settings: Nullable<SettingType>;
   bookedDates: Date[];
 }
+// type RangeType = {from:Nullable<Date>, to:Nullable<Date>}
 
 function DateSelector({ cabin, settings, bookedDates }: Props) {
+  const { range, setRange, resetRange } = useReservation();
   // CHANGE
   const regularPrice = 23;
   const discount = 23;
   const numNights = 23;
   const cabinPrice = 23;
-  const range = { from: null, to: null };
 
   // SETTINGS
   if (!settings) return null;
@@ -43,6 +46,10 @@ function DateSelector({ cabin, settings, bookedDates }: Props) {
       <DayPicker
         className='pt-12 place-self-center'
         mode='range'
+        onSelect={range =>
+          setRange(range ?? { from: undefined, to: undefined })
+        }
+        selected={range}
         min={minBookingLength + 1}
         max={maxBookingLength}
         fromMonth={new Date()}
@@ -82,8 +89,8 @@ function DateSelector({ cabin, settings, bookedDates }: Props) {
 
         {range.from || range.to ? (
           <button
-            className='border border-primary-800 py-2 px-4 text-sm font-semibold'
-            // onClick={() => resetRange()}
+            className='border border-primary-800 py-2 px-4 text-sm font-semibold z-10 bg-accent-500'
+            onClick={resetRange}
           >
             Clear
           </button>

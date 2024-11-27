@@ -37,3 +37,10 @@
   --rdp-background-color: theme('colors.accent.600') !important;
   margin: 0 !important;
 }
+
+.rdp-range_start .rdp-day_button,
+.rdp-range_end .rdp-day_button,
+.rdp-range_middle .rdp-day_button,
+.rdp-range_end {
+  background-color: #c69963 !important;
+}

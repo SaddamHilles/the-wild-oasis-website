@@ -3,6 +3,8 @@ import DateSelector from '../DateSelector';
 import ReservationForm from '../ReservationForm';
 import { getBookedDatesByCabinId, getSettings } from '@/services/data-services';
 import { CabinType } from '@/utils/types.t';
+import { auth } from '@/lib/auth';
+import LoginMessage from '../LoginMessage';
 
 interface Props {
   cabin: CabinType;
@@ -12,6 +14,7 @@ async function Reservation({ cabin }: Props) {
     getSettings(),
     getBookedDatesByCabinId(cabin.id),
   ]);
+  const session = await auth();
   return (
     <div className='grid grid-cols-2 border border-primary-800 min-h-[400px]'>
       <DateSelector
@@ -19,7 +22,11 @@ async function Reservation({ cabin }: Props) {
         cabin={cabin}
         bookedDates={bookedDates}
       />
-      <ReservationForm cabin={cabin} />
+      {session?.user ? (
+        <ReservationForm cabin={cabin} user={session.user} />
+      ) : (
+        <LoginMessage />
+      )}
     </div>
   );
 }
