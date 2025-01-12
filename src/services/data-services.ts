@@ -1,12 +1,16 @@
 import { eachDayOfInterval } from 'date-fns';
 import { createClient } from '@supabase/supabase-js';
 import { supabase } from './supabase';
-import { CabinType } from '@/utils/types.t';
+import { CabinType, Nullable } from '@/utils/types.t';
 import { notFound } from 'next/navigation';
 
-type Guest = {
-  id: number;
+export type Guest = {
   email: string;
+  fullName: string;
+  // id: Nullable<string>;
+  nationality: string;
+  nationalID: string;
+  countryFlag: string;
   // add other fields as needed
 };
 
